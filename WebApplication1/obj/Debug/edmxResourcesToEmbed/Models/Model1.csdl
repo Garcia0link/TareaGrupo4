@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ESCUELAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="LIBRERIAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ID_LIBRO" Type="Int32" />
+    <NavigationProperty Name="LIBRO2" Relationship="Self.FK__LIBRERIAS__ID_LI__4E88ABD4" FromRole="LIBRERIAS" ToRole="LIBRO2" />
+    <NavigationProperty Name="USUARIO2" Relationship="Self.FK__LIBRERIAS__NOMBR__4D94879B" FromRole="LIBRERIAS" ToRole="USUARIO2" />
+  </EntityType>
+  <EntityType Name="LIBRO2">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AUTOR" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="FECHA" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="LIBRERIAS" Relationship="Self.FK__LIBRERIAS__ID_LI__4E88ABD4" FromRole="LIBRO2" ToRole="LIBRERIAS" />
+  </EntityType>
+  <EntityType Name="USUARIO2">
+    <Key>
+      <PropertyRef Name="NOMBRE" />
+    </Key>
+    <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CONTRASEÑA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LIBRERIAS" Relationship="Self.FK__LIBRERIAS__NOMBR__4D94879B" FromRole="USUARIO2" ToRole="LIBRERIAS" />
+  </EntityType>
+  <Association Name="FK__LIBRERIAS__ID_LI__4E88ABD4">
+    <End Role="LIBRO2" Type="Self.LIBRO2" Multiplicity="0..1" />
+    <End Role="LIBRERIAS" Type="Self.LIBRERIAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LIBRO2">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LIBRERIAS">
+        <PropertyRef Name="ID_LIBRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LIBRERIAS__NOMBR__4D94879B">
+    <End Role="USUARIO2" Type="Self.USUARIO2" Multiplicity="0..1" />
+    <End Role="LIBRERIAS" Type="Self.LIBRERIAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO2">
+        <PropertyRef Name="NOMBRE" />
+      </Principal>
+      <Dependent Role="LIBRERIAS">
+        <PropertyRef Name="NOMBRE_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ESCUELAEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LIBRERIAS" EntityType="Self.LIBRERIAS" />
+    <EntitySet Name="LIBRO2" EntityType="Self.LIBRO2" />
+    <EntitySet Name="USUARIO2" EntityType="Self.USUARIO2" />
+    <AssociationSet Name="FK__LIBRERIAS__ID_LI__4E88ABD4" Association="Self.FK__LIBRERIAS__ID_LI__4E88ABD4">
+      <End Role="LIBRO2" EntitySet="LIBRO2" />
+      <End Role="LIBRERIAS" EntitySet="LIBRERIAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LIBRERIAS__NOMBR__4D94879B" Association="Self.FK__LIBRERIAS__NOMBR__4D94879B">
+      <End Role="USUARIO2" EntitySet="USUARIO2" />
+      <End Role="LIBRERIAS" EntitySet="LIBRERIAS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

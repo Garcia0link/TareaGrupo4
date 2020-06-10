@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ESCUELAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LIBRERIAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_USUARIO" Type="varchar" MaxLength="30" />
+          <Property Name="ID_LIBRO" Type="int" />
+        </EntityType>
+        <EntityType Name="LIBRO2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" />
+          <Property Name="AUTOR" Type="char" MaxLength="30" />
+          <Property Name="FECHA" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USUARIO2">
+          <Key>
+            <PropertyRef Name="NOMBRE" />
+          </Key>
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CONTRASEÑA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__LIBRERIAS__ID_LI__4E88ABD4">
+          <End Role="LIBRO2" Type="Self.LIBRO2" Multiplicity="0..1" />
+          <End Role="LIBRERIAS" Type="Self.LIBRERIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRO2">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LIBRERIAS">
+              <PropertyRef Name="ID_LIBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LIBRERIAS__NOMBR__4D94879B">
+          <End Role="USUARIO2" Type="Self.USUARIO2" Multiplicity="0..1" />
+          <End Role="LIBRERIAS" Type="Self.LIBRERIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO2">
+              <PropertyRef Name="NOMBRE" />
+            </Principal>
+            <Dependent Role="LIBRERIAS">
+              <PropertyRef Name="NOMBRE_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ESCUELAModelStoreContainer">
+          <EntitySet Name="LIBRERIAS" EntityType="Self.LIBRERIAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LIBRO2" EntityType="Self.LIBRO2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO2" EntityType="Self.USUARIO2" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__LIBRERIAS__ID_LI__4E88ABD4" Association="Self.FK__LIBRERIAS__ID_LI__4E88ABD4">
+            <End Role="LIBRO2" EntitySet="LIBRO2" />
+            <End Role="LIBRERIAS" EntitySet="LIBRERIAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LIBRERIAS__NOMBR__4D94879B" Association="Self.FK__LIBRERIAS__NOMBR__4D94879B">
+            <End Role="USUARIO2" EntitySet="USUARIO2" />
+            <End Role="LIBRERIAS" EntitySet="LIBRERIAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ESCUELAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LIBRERIAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ID_LIBRO" Type="Int32" />
+          <NavigationProperty Name="LIBRO2" Relationship="Self.FK__LIBRERIAS__ID_LI__4E88ABD4" FromRole="LIBRERIAS" ToRole="LIBRO2" />
+          <NavigationProperty Name="USUARIO2" Relationship="Self.FK__LIBRERIAS__NOMBR__4D94879B" FromRole="LIBRERIAS" ToRole="USUARIO2" />
+        </EntityType>
+        <EntityType Name="LIBRO2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AUTOR" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LIBRERIAS" Relationship="Self.FK__LIBRERIAS__ID_LI__4E88ABD4" FromRole="LIBRO2" ToRole="LIBRERIAS" />
+        </EntityType>
+        <EntityType Name="USUARIO2">
+          <Key>
+            <PropertyRef Name="NOMBRE" />
+          </Key>
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTRASEÑA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LIBRERIAS" Relationship="Self.FK__LIBRERIAS__NOMBR__4D94879B" FromRole="USUARIO2" ToRole="LIBRERIAS" />
+        </EntityType>
+        <Association Name="FK__LIBRERIAS__ID_LI__4E88ABD4">
+          <End Role="LIBRO2" Type="Self.LIBRO2" Multiplicity="0..1" />
+          <End Role="LIBRERIAS" Type="Self.LIBRERIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRO2">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LIBRERIAS">
+              <PropertyRef Name="ID_LIBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LIBRERIAS__NOMBR__4D94879B">
+          <End Role="USUARIO2" Type="Self.USUARIO2" Multiplicity="0..1" />
+          <End Role="LIBRERIAS" Type="Self.LIBRERIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO2">
+              <PropertyRef Name="NOMBRE" />
+            </Principal>
+            <Dependent Role="LIBRERIAS">
+              <PropertyRef Name="NOMBRE_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ESCUELAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LIBRERIAS" EntityType="Self.LIBRERIAS" />
+          <EntitySet Name="LIBRO2" EntityType="Self.LIBRO2" />
+          <EntitySet Name="USUARIO2" EntityType="Self.USUARIO2" />
+          <AssociationSet Name="FK__LIBRERIAS__ID_LI__4E88ABD4" Association="Self.FK__LIBRERIAS__ID_LI__4E88ABD4">
+            <End Role="LIBRO2" EntitySet="LIBRO2" />
+            <End Role="LIBRERIAS" EntitySet="LIBRERIAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LIBRERIAS__NOMBR__4D94879B" Association="Self.FK__LIBRERIAS__NOMBR__4D94879B">
+            <End Role="USUARIO2" EntitySet="USUARIO2" />
+            <End Role="LIBRERIAS" EntitySet="LIBRERIAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ESCUELAModelStoreContainer" CdmEntityContainer="ESCUELAEntities">
+          <EntitySetMapping Name="LIBRERIAS">
+            <EntityTypeMapping TypeName="ESCUELAModel.LIBRERIAS">
+              <MappingFragment StoreEntitySet="LIBRERIAS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
+                <ScalarProperty Name="ID_LIBRO" ColumnName="ID_LIBRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIBRO2">
+            <EntityTypeMapping TypeName="ESCUELAModel.LIBRO2">
+              <MappingFragment StoreEntitySet="LIBRO2">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="AUTOR" ColumnName="AUTOR" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO2">
+            <EntityTypeMapping TypeName="ESCUELAModel.USUARIO2">
+              <MappingFragment StoreEntitySet="USUARIO2">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CONTRASEÑA" ColumnName="CONTRASEÑA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
