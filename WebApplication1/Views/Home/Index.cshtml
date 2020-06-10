@@ -2,9 +2,36 @@
     ViewBag.Title = "BIBLIOTECA";
 }
 
-
-<body style="background-color:#E8BB39;">
-</body>
+    <style type="text/css">
+        body {
+    padding-left: 11em;
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: black;
+    background-color: #E8BB39 }
+  ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
+  h1 {
+    font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif }
+  ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em;
+    border-right: 1em solid black }
+  ul.navbar a {
+    text-decoration: none }
+  a:link {
+    color: blue }
+  a:visited {
+    color: purple }
+    </style>
 
 
 
@@ -18,25 +45,23 @@
 </div>
 
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Usuario", "Index", "USUARIO2")</h2>
+        <li>@Html.ActionLink("Usuario", "Index", "USUARIO2")</li>
         <p>
             Si da click aqui podra acceder al CRUD de la tabla Usuario
         </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Libros", "Index", "LIBRO2")</h2>
+
+    
+        <li>@Html.ActionLink("Libros", "Index", "LIBRO2")</li>
         <p>Si da click aqui podra acceder al CRUD de la tabla Libro</p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Libreria", "Index", "LIBRERIAS")</h2>
+    
+    
+        <li>@Html.ActionLink("Libreria", "Index", "LIBRERIAS")</li>
         <p>
             Si da click aqui podra acceder al CRUD de la tabla Libreria
         </p>
-    </div>
+    
 
-</div>
+
 
 <h><img src="~/NewFolder1/romans.jpg" height="1000" width="1000"</h>
 
